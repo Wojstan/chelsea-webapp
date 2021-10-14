@@ -1,0 +1,14 @@
+.brand {
+  display: flex;
+  align-items: center;
+  padding: 2.3rem;
+}
+
+.blue {
+  color: #034694;
+  font-weight: 700;
+}
+
+.logo {
+  margin-right: 1rem;
+}
