@@ -1,18 +1,29 @@
 import { Layout } from "antd";
+import Menu from "./components/Modules/Menu/Menu";
+import Home from "./views/Home/Home";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content, Header } = Layout;
 
-const App = () => {
-  return (
-    <Layout>
-      <Sider>side</Sider>
-      <Layout>
-        <Header>header</Header>
-        <Content>content</Content>
-        <Footer>footer</Footer>
-      </Layout>
+const App = () => (
+  <Layout>
+    <Sider
+      style={{
+        overflow: "hidden",
+        height: "100vh",
+        position: "fixed",
+        left: 0,
+      }}
+      width="18rem"
+    >
+      <Menu />
+    </Sider>
+    <Layout className="site-layout" style={{ marginLeft: "18rem" }}>
+      <Header></Header>
+      <Content>
+        <Home />
+      </Content>
     </Layout>
-  );
-};
+  </Layout>
+);
 
 export default App;

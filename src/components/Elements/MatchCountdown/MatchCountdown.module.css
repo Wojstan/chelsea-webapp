@@ -1,0 +1,8 @@
+.countdown h1 {
+  color: #fbfdff !important;
+  text-align: center;
+  z-index: 5;
+  margin: 0.5rem 0 !important;
+  position: relative;
+  font-size: 3rem;
+}

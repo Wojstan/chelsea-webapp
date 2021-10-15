@@ -1,0 +1,42 @@
+.ant-menu-item {
+  border-radius: 15px;
+}
+
+.ant-layout {
+  background: radial-gradient(
+    100% 303.32% at 0% 0%,
+    #f6f8fa 14.79%,
+    #eaf4fc 43.77%,
+    #eef2f9 90.63%
+  ) !important;
+}
+
+.ant-layout-content {
+  min-height: 95vh;
+  padding: 3rem;
+  background-color: transparent;
+}
+
+.ant-layout-sider {
+  background-color: transparent;
+}
+
+.ant-layout-header {
+  background-color: transparent;
+}
+
+.ant-menu {
+  background-color: transparent;
+}
+
+.ant-card {
+  border-radius: 18px;
+  background-color: #fbfdffc2;
+  margin-bottom: 2rem;
+}
+
+h3.ant-typography,
+.ant-typography h3 {
+  font-weight: 700;
+  color: #4e4e4e;
+}
