@@ -6,8 +6,8 @@ const { Text, Title } = Typography;
 type Props = {
   column: boolean;
   separator: boolean;
-  homeScore?: number;
-  awayScore?: number;
+  homeScore: string;
+  awayScore: string;
   homeCrest: string;
   awayCrest: string;
   competition: string;
@@ -55,7 +55,7 @@ const FixtureBlock = ({
         <Col
           xxl={6}
           style={{
-            padding: "2rem 0rem 1rem 4rem",
+            padding: "0em 0rem 1rem 4rem",
             borderRight: separator ? "1px solid #E9ECEF" : "",
             fontSize: "1rem",
           }}

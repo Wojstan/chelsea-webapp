@@ -12,12 +12,16 @@
 }
 
 .ant-layout-content {
-  min-height: 100vh;
+  min-height: 95vh;
   padding: 3rem;
   background-color: transparent;
 }
 
 .ant-layout-sider {
+  background-color: transparent;
+}
+
+.ant-layout-header {
   background-color: transparent;
 }
 
