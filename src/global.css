@@ -31,7 +31,7 @@
 
 .ant-card {
   border-radius: 18px;
-  background-color: #fbfdffc2;
+  background-color: #fbfdffc9;
   margin-bottom: 2rem;
 }
 
@@ -39,4 +39,26 @@ h3.ant-typography,
 .ant-typography h3 {
   font-weight: 700;
   color: #4e4e4e;
+}
+
+.site-layout {
+  margin-left: 18rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .site-layout {
+    margin-left: 0rem;
+  }
+  .ant-layout-sider {
+    display: none;
+  }
+  .ant-layout-header {
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .ant-layout-content {
+    padding: 0.8rem;
+  }
 }

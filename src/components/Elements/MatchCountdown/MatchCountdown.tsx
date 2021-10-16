@@ -51,7 +51,7 @@ const MatchCountdown = ({ nextMatch }: Props) => {
         {minutes} {minutes === 1 ? "minute" : "minutes"}
       </Title>
       <Title>
-        {seconds} {seconds === 1 ? "second" : "second"}
+        {seconds} {seconds === 1 ? "second" : "seconds"}
       </Title>
     </span>
   );

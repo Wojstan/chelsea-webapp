@@ -35,11 +35,8 @@ const FixtureBlock = ({
     <>
       <Text type="secondary">{competition}</Text>
       <br />
-      <Text style={{ fontWeight: 500 }}>{date.toDateString()}</Text>
-      <div
-        className={styles.result}
-        style={column ? { paddingRight: "4rem" } : {}}
-      >
+      <Text style={{ fontWeight: 500 }}>{date.toLocaleString()}</Text>
+      <div className={`${styles.result} ${styles.pd} `}>
         <img src={homeCrest} height={80} alt="" />
         <Title className={styles.text} level={1}>
           {homeScore}-{awayScore}
@@ -53,10 +50,11 @@ const FixtureBlock = ({
     <>
       {column ? (
         <Col
+          span={24}
+          md={12}
           xxl={6}
+          className={`${separator ? styles.border : ""}`}
           style={{
-            padding: "0em 0rem 1rem 4rem",
-            borderRight: separator ? "1px solid #E9ECEF" : "",
             fontSize: "1rem",
           }}
         >

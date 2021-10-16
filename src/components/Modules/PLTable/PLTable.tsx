@@ -13,52 +13,54 @@ const PLTable = () => {
   }
 
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th>POS.</th>
-          <th>TEAM</th>
-          <th>M</th>
-          <th>B</th>
-          <th>P</th>
-        </tr>
-      </thead>
+    <div className={styles.scroll}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>POS.</th>
+            <th>TEAM</th>
+            <th>M</th>
+            <th>B</th>
+            <th>P</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {tableData.map(
-          (team: any, i: number) =>
-            i < 10 && (
-              <tr
-                className={
-                  team.team.name === "Chelsea FC" ? styles.chelsea : ""
-                }
-                key={team.position}
-              >
-                <td>{team.position}</td>
-                <td className={styles.team}>
-                  <div className={styles.logo}>
-                    <img src={team.team.crestUrl} alt="" />
-                  </div>
-                  {team.team.name}
-                </td>
-                <td>{team.playedGames}</td>
-                <td>
-                  {team.goalsFor}:{team.goalsAgainst}
-                </td>
-                <td
+        <tbody>
+          {tableData.map(
+            (team: any, i: number) =>
+              i < 10 && (
+                <tr
                   className={
-                    team.team.name === "Chelsea FC"
-                      ? styles.chelsea
-                      : styles.points
+                    team.team.name === "Chelsea FC" ? styles.chelsea : ""
                   }
+                  key={team.position}
                 >
-                  {team.points}
-                </td>
-              </tr>
-            )
-        )}
-      </tbody>
-    </table>
+                  <td>{team.position}</td>
+                  <td className={styles.team}>
+                    <div className={styles.logo}>
+                      <img src={team.team.crestUrl} alt="" />
+                    </div>
+                    {team.team.name}
+                  </td>
+                  <td>{team.playedGames}</td>
+                  <td>
+                    {team.goalsFor}:{team.goalsAgainst}
+                  </td>
+                  <td
+                    className={
+                      team.team.name === "Chelsea FC"
+                        ? styles.chelsea
+                        : styles.points
+                    }
+                  >
+                    {team.points}
+                  </td>
+                </tr>
+              )
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

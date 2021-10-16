@@ -1,4 +1,4 @@
-import { Row, Col, Spin, Statistic, Typography } from "antd";
+import { Row, Col, Spin, Typography } from "antd";
 import FixtureBlock from "../../components/Elements/FixtureBlock/FixtureBlock";
 import MatchCountdown from "../../components/Elements/MatchCountdown/MatchCountdown";
 import HomeSection from "../../components/Modules/HomeSection/HomeSection";
@@ -6,17 +6,9 @@ import PLTable from "../../components/Modules/PLTable/PLTable";
 import lion from "../../images/lion.png";
 import { useGetChelseaMatchesQuery } from "../../services/footbalAPI";
 
-import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
-
-type Match = {
-  awayTeam: { id: number };
-  competition: { name: string };
-  homeTeam: { id: number };
-  utcDate: string;
-  score: {
-    fullTime: { homeTeam: number; awayTeam: number };
-  };
-};
+import styles from "./Home.module.css";
+import { Match } from "./match";
+import StatSections from "../../components/Modules/StatBlock/StatSections";
 
 const { Title } = Typography;
 
@@ -51,100 +43,62 @@ const Home = () => {
       </HomeSection>
 
       <Row gutter={24}>
-        <Col xxl={12}>
+        <Col span={24} xxl={12}>
           <HomeSection title="Premier League">
             <PLTable />
           </HomeSection>
         </Col>
+        <Col sm={24} xxl={12}>
+          <Row gutter={24}>
+            <Col md={14} span={24}>
+              <HomeSection title="Last match">
+                <FixtureBlock
+                  column={false}
+                  homeScore={lastMatch.score.fullTime.homeTeam.toString()}
+                  awayScore={lastMatch.score.fullTime.awayTeam.toString()}
+                  homeCrest={`https://crests.football-data.org/${lastMatch.homeTeam.id}.svg`}
+                  awayCrest={`https://crests.football-data.org/${lastMatch.awayTeam.id}.svg`}
+                  competition={lastMatch.competition.name}
+                  date={new Date(lastMatch.utcDate)}
+                />
+              </HomeSection>
 
-        <Col xxl={7}>
-          <HomeSection title="Last match">
-            <FixtureBlock
-              column={false}
-              homeScore={lastMatch.score.fullTime.homeTeam.toString()}
-              awayScore={lastMatch.score.fullTime.awayTeam.toString()}
-              homeCrest={`https://crests.football-data.org/${lastMatch.homeTeam.id}.svg`}
-              awayCrest={`https://crests.football-data.org/${lastMatch.awayTeam.id}.svg`}
-              competition={lastMatch.competition.name}
-              date={new Date(lastMatch.utcDate)}
-            />
-          </HomeSection>
-          <HomeSection title="AVG xG" style={{ minHeight: "11.7rem" }}>
-            <div style={{ display: "flex" }}>
-              <Statistic
-                prefix={<ArrowUpOutlined />}
-                valueStyle={{ color: "#3f8600" }}
-                title="AVG xG per match"
-                value={3.53}
-                style={{ marginRight: "1.5rem" }}
-              />
-              <Statistic
-                prefix={<ArrowUpOutlined />}
-                valueStyle={{ color: "#3f8600" }}
-                title="AVG xGA per match"
-                value={0.53}
-              />
-            </div>
-          </HomeSection>
+              <StatSections />
+            </Col>
 
-          <HomeSection
-            title="Last match stats"
-            style={{ minHeight: "11.7rem" }}
-          >
-            <div style={{ display: "flex" }}>
-              <Statistic
-                prefix={<ArrowDownOutlined />}
-                valueStyle={{ color: "#cf1322" }}
-                title="Last match xG"
-                value={2.51}
-                style={{ marginRight: "1.5rem" }}
-              />
-              <Statistic
-                prefix={<ArrowUpOutlined />}
-                valueStyle={{ color: "#3f8600" }}
-                title="Last match xGA"
-                value={0.11}
-              />
-            </div>
-          </HomeSection>
-        </Col>
+            <Col md={10} span={24}>
+              <HomeSection
+                title="Till the next match"
+                className=""
+                style={{
+                  backgroundColor: "#003CBE",
+                  height: "30rem",
+                  position: "relative",
+                }}
+                titleStyle={{
+                  color: "#FBFDFF",
+                  paddingBottom: "3rem",
+                }}
+              >
+                <img
+                  height={250}
+                  src={lion}
+                  alt=""
+                  style={{ position: "absolute", bottom: "3%", right: "3%" }}
+                />
 
-        <Col xxl={5}>
-          <HomeSection
-            title="Till the next match"
-            style={{
-              backgroundColor: "#003CBE",
-              height: "30rem",
-              position: "relative",
-            }}
-            titleStyle={{
-              color: "#FBFDFF",
-              paddingBottom: "3rem",
-            }}
-          >
-            <img
-              height={250}
-              src={lion}
-              alt=""
-              style={{ position: "absolute", bottom: "3%", right: "3%" }}
-            />
-
-            <MatchCountdown nextMatch={new Date(nextMatch.utcDate).getTime()} />
-          </HomeSection>
-          <HomeSection>
-            <Title
-              style={{
-                marginBottom: "4rem",
-                fontSize: "4rem",
-                color: "rgb(0, 60, 190)",
-              }}
-            >
-              9
-            </Title>
-            <Title level={3} type="secondary">
-              not completed matches
-            </Title>
-          </HomeSection>
+                <MatchCountdown
+                  nextMatch={new Date(nextMatch.utcDate).getTime()}
+                />
+              </HomeSection>
+              <HomeSection style={{ height: "15rem" }}>
+                <Title className={styles.important}>9</Title>
+                <Title level={3} type="secondary">
+                  not completed matches
+                </Title>
+              </HomeSection>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </>

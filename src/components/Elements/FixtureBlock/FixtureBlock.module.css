@@ -5,6 +5,26 @@
   margin-top: 2.5rem;
 }
 
+.pd {
+  padding-right: 4rem;
+}
+
 .text {
   margin: 0rem 1.5rem !important;
+}
+
+.border {
+  border-right: 1px solid #e9ecef;
+  padding: 0em 0rem 1rem 4rem;
+}
+
+@media screen and (max-width: 768px) {
+  .border {
+    border-right: none;
+    padding: 1rem;
+  }
+
+  .pd {
+    padding-right: 0rem;
+  }
 }

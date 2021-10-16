@@ -1,0 +1,27 @@
+.mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: 0;
+  padding-inline-start: 0;
+}
+
+.menu li {
+  font-size: 1.8rem;
+  margin: 0.5rem;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+@media screen and (min-width: 1200px) {
+  .mobile {
+    display: none;
+  }
+}

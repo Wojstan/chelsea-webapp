@@ -2,6 +2,7 @@ import { Card, Typography } from "antd";
 
 type Props = {
   children?: React.ReactNode;
+  className?: string;
   style?: any;
   titleStyle?: any;
   title?: string;
