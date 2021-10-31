@@ -1,8 +1,26 @@
-.countdown h1 {
-  color: #fbfdff !important;
+.countdown {
+  margin: 6rem 0;
+  background-image: url("../../../images/counter.png");
+  background-position: center;
+  height: 520px;
+  background-size: cover;
   text-align: center;
-  z-index: 5;
-  margin: 0.5rem 0 !important;
-  position: relative;
-  font-size: 3rem;
+  vertical-align: text-bottom;
+}
+
+.countdown h1 {
+  margin: 18rem 0.7rem 0 0.7rem;
+  color: #e8e8e8 !important;
+  font-size: 5rem;
+  display: inline-block;
+}
+
+.bottom {
+  display: flex;
+  align-items: flex-end;
+}
+
+.countdown p {
+  font-size: 1.2rem;
+  color: #e8e8e8 !important;
 }

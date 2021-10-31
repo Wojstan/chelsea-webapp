@@ -1,0 +1,51 @@
+.header {
+  background-color: #f2f3f7;
+  border-bottom: 1px solid #dfdfdf;
+  position: relative;
+  height: 317px;
+}
+
+.flex {
+  padding-top: 2vh;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 190px;
+  width: 190px;
+  padding: 1.5rem;
+  border-radius: 50%;
+  background-color: white;
+  margin-right: 1.5rem;
+}
+
+.logo img {
+  height: 100%;
+}
+
+.stadium {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.top {
+  background-color: #001488;
+  text-align: center;
+  padding: 0.8rem;
+  color: white;
+}
+
+.link {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.link:hover {
+  color: #001488;
+}
+
+.header p {
+  margin-bottom: 0.8rem;
+}

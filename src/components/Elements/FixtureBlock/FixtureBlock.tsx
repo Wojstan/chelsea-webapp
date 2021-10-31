@@ -1,17 +1,17 @@
-import { Col, Typography } from "antd";
 import styles from "./FixtureBlock.module.css";
-
-const { Text, Title } = Typography;
 
 type Props = {
   column: boolean;
   separator: boolean;
   homeScore: string;
   awayScore: string;
+  homeTeam: string;
+  awayTeam: string;
   homeCrest: string;
   awayCrest: string;
   competition: string;
   date: Date;
+  style?: any;
 } & typeof defaultProps;
 
 const defaultProps = {
@@ -22,50 +22,42 @@ const defaultProps = {
 };
 
 const FixtureBlock = ({
-  column,
   competition,
   homeScore,
   awayScore,
+  homeTeam,
+  awayTeam,
   homeCrest,
   awayCrest,
   date,
-  separator,
+  style,
 }: Props) => {
-  const blockTemplate = (
-    <>
-      <Text type="secondary">{competition}</Text>
-      <br />
-      <Text style={{ fontWeight: 500 }}>{date.toLocaleString()}</Text>
-      <div className={`${styles.result} ${styles.pd} `}>
-        <img src={homeCrest} height={80} alt="" />
-        <Title className={styles.text} level={1}>
-          {homeScore}-{awayScore}
-        </Title>
-        <img src={awayCrest} height={80} alt="" />
-      </div>
-    </>
-  );
-
   return (
-    <>
-      {column ? (
-        <Col
-          span={24}
-          md={12}
-          xxl={6}
-          className={`${separator ? styles.border : ""}`}
-          style={{
-            fontSize: "1rem",
-          }}
-        >
-          {blockTemplate}
-        </Col>
-      ) : (
-        <div style={{ padding: "1rem 0", fontSize: "1rem" }}>
-          {blockTemplate}
-        </div>
-      )}
-    </>
+    <div className={styles.block} style={style}>
+      <h5 className="mb-3">{competition}</h5>
+      <h6>{homeTeam === "Chelsea FC" ? "Home" : "Away"}</h6>
+      <h6 className="mb-3">{date.toLocaleString()}</h6>
+      <div className={styles.score}>
+        <span>
+          <img height={60} src={homeCrest} alt="" />
+          <h4>{homeTeam}</h4>
+        </span>
+        <h4>{homeScore}</h4>
+      </div>
+
+      <div className={styles.score} style={{ marginBottom: "2.5rem" }}>
+        <span>
+          <img height={60} src={awayCrest} alt="" />
+          <h4>{awayTeam}</h4>
+        </span>
+        <h4>{awayScore}</h4>
+      </div>
+
+      <div className={styles.triangle}></div>
+      <a href="#" className={styles.centre}>
+        Match centre
+      </a>
+    </div>
   );
 };
 

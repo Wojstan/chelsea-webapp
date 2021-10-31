@@ -1,33 +1,23 @@
-import { Layout } from "antd";
-import Menu from "./components/Modules/Menu/Menu";
 import Home from "./views/Home/Home";
-import MobileMenu from "./components/Modules/MobileMenu/MobileMenu";
-
-const { Sider, Content, Header } = Layout;
+import DefaultLayout from "./layout/DefaultLayout";
+import { Switch, Route } from "react-router-dom";
+import Fixture from "./views/Fixture/Fixture";
+import Results from "./views/Results/Results";
 
 const App = () => (
-  <Layout>
-    <Sider
-      style={{
-        overflow: "hidden",
-        height: "100vh",
-        position: "fixed",
-        left: 0,
-      }}
-      width="18rem"
-    >
-      <Menu />
-    </Sider>
-
-    <Layout className="site-layout">
-      <Header>
-        <MobileMenu />
-      </Header>
-      <Content>
+  <DefaultLayout>
+    <Switch>
+      <Route exact path="/">
         <Home />
-      </Content>
-    </Layout>
-  </Layout>
+      </Route>
+      <Route exact path="/fixture">
+        <Fixture />
+      </Route>
+      <Route exact path="/results">
+        <Results />
+      </Route>
+    </Switch>
+  </DefaultLayout>
 );
 
 export default App;

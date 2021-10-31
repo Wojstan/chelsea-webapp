@@ -1,14 +1,12 @@
-import { Typography } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import styles from "./MatchCountdown.module.css";
 
 type Props = {
   nextMatch: number;
+  awayTeam: string;
 };
 
-const { Title } = Typography;
-
-const MatchCountdown = ({ nextMatch }: Props) => {
+const MatchCountdown = ({ nextMatch, awayTeam }: Props) => {
   const [time, setTime] = useState({
     days: 0,
     hours: 0,
@@ -40,20 +38,15 @@ const MatchCountdown = ({ nextMatch }: Props) => {
   }, [tick]);
 
   return (
-    <span className={styles.countdown} style={{ zIndex: 5 }}>
-      <Title>
-        {days} {days === 1 ? "day" : "days"}
-      </Title>
-      <Title>
-        {hours} {hours === 1 ? "hour" : "hours"}
-      </Title>
-      <Title>
-        {minutes} {minutes === 1 ? "minute" : "minutes"}
-      </Title>
-      <Title>
-        {seconds} {seconds === 1 ? "second" : "seconds"}
-      </Title>
-    </span>
+    <div className={styles.countdown}>
+      <h1>{days}d</h1>
+      <h1>{hours}h</h1>
+      <h1>{minutes}m</h1>
+      <h1>{seconds}s</h1>
+      <p>
+        Till the next match with <strong>{awayTeam}</strong>
+      </p>
+    </div>
   );
 };
 

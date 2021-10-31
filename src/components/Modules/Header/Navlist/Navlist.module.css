@@ -1,0 +1,18 @@
+.navlist {
+  list-style: none;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+}
+
+.navlist li {
+  color: #858585;
+  padding: 1rem 2.5rem;
+  cursor: pointer;
+}
+
+.active li {
+  color: #000000 !important;
+  border-bottom: 3px solid #001488;
+  border-radius: 2px;
+}

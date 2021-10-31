@@ -1,0 +1,14 @@
+.centre {
+  background-color: #f2f3f7;
+  padding: 1.2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e3e6ef;
+}
+
+.link {
+  color: #0033fe;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
