@@ -5,7 +5,7 @@ export type Player = {
   img: string;
   number: number;
   nation: string;
-  rating?: number;
+  rating: number;
   position: {
     id: number;
     top: string;

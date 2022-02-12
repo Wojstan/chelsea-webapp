@@ -67,7 +67,7 @@ export const formation = [
   },
 ];
 
-export const subs = [
+export const subPlayers = [
   {
     id: 12,
     name: "Sub 1",

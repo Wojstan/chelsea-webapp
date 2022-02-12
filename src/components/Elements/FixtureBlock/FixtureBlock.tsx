@@ -119,11 +119,13 @@ const FixtureBlock = ({
         <button>
           <StarOutlined />
         </button>
-        <Link to={`/results/${id}`}>
-          <button>
-            <ReconciliationOutlined />
-          </button>
-        </Link>
+        {homeScore !== "" && (
+          <Link to={`/results/${id}`}>
+            <button>
+              <ReconciliationOutlined />
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

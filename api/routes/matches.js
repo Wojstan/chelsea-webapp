@@ -13,14 +13,43 @@ router.get("/:matchId", async (req, res) => {
 
 router.post("/:matchId", async (req, res) => {
   const match = new Match({
-    _id: req.body._id,
-    lineup: req.body.lineup,
-    ratings: req.body.ratings,
-    goals: req.body.goals,
+    _id: req.params.matchId,
+    lineup: [],
+    subs: [],
+    events: [],
   });
   try {
     const savedMatch = await match.save();
+
     res.json(savedMatch);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+router.post("/lineup/:matchId", async (req, res) => {
+  try {
+    const match = await Match.findById(req.params.matchId);
+    const newPlayer = req.body.player;
+
+    match.lineup.push(newPlayer);
+    match.save();
+
+    res.json(newPlayer);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+router.post("/subs/:matchId", async (req, res) => {
+  try {
+    const match = await Match.findById(req.params.matchId);
+    const newPlayer = req.body.player;
+
+    match.subs.push(newPlayer);
+    match.save();
+
+    res.json(newPlayer);
   } catch (err) {
     res.json({ message: err });
   }
@@ -28,26 +57,20 @@ router.post("/:matchId", async (req, res) => {
 
 router.patch("/lineup/:matchId", async (req, res) => {
   try {
-    const updatedMatch = await Match.findByIdAndUpdate(
-      { _id: req.params.matchId },
-      { $set: { lineup: req.body.lineup } },
-      { new: true, useFindAndModify: false }
-    );
-    res.json(updatedMatch);
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
+    const match = await Match;
 
-router.patch("/events/:matchId", async (req, res) => {
-  try {
-    const updatedMatch = await Match.findByIdAndUpdate(
-      { _id: req.params.matchId },
-      { $set: { goals: req.body.goals } },
-      { new: true, useFindAndModify: false }
+    match.updateOne(
+      { _id: Number(req.params.matchId), "lineup.id": req.body.id },
+      {
+        $set: {
+          "lineup.$.rating": req.body.rating,
+        },
+      }
     );
-    res.json(updatedMatch);
+
+    res.json({ id: req.body.id, rating: req.body.rating });
   } catch (err) {
+    console.log(err);
     res.json({ message: err });
   }
 });

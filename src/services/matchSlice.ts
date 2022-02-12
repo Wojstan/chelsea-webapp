@@ -17,7 +17,7 @@ export const getMatch = createAsyncThunk(
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            _id: payload.id,
+            _id: id,
             lineup: [],
           }),
         });
@@ -26,28 +26,78 @@ export const getMatch = createAsyncThunk(
           match = await response.json();
         }
       }
+
       return { match };
     }
   }
 );
 
-export const modifyLineup = createAsyncThunk(
-  "match/addMatch",
-  async (payload: { id: number; team: Array<any> }) => {
-    const { id, team } = payload;
+export const addLineup = createAsyncThunk(
+  "match/addLineup",
+  async (payload: { id: number; newPlayer: Player }) => {
+    const { id, newPlayer } = payload;
     const response = await fetch(`http://localhost:4442/matches/lineup/${id}`, {
-      method: "PATCH",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        lineup: team,
+        player: newPlayer,
       }),
     });
 
     if (response.ok) {
-      const match = await response.json();
-      return { match };
+      const player = await response.json();
+
+      return { player };
+    }
+  }
+);
+
+export const modifyRating = createAsyncThunk(
+  "match/modifyRating",
+  async (payload: { pageId: string; id: number; rating: number }) => {
+    const { pageId, id, rating } = payload;
+    const response = await fetch(
+      `http://localhost:4442/matches/lineup/${pageId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          rating,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      const rating = await response.json();
+
+      return { rating };
+    }
+  }
+);
+
+export const addSub = createAsyncThunk(
+  "match/addSub",
+  async (payload: { id: number; newPlayer: Player }) => {
+    const { id, newPlayer } = payload;
+    const response = await fetch(`http://localhost:4442/matches/subs/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        player: newPlayer,
+      }),
+    });
+
+    if (response.ok) {
+      const player = await response.json();
+
+      return { player };
     }
   }
 );
@@ -55,6 +105,7 @@ export const modifyLineup = createAsyncThunk(
 interface MatchState {
   game: {
     lineup: Array<Player>;
+    subs: Array<Player>;
     events: Array<any>;
   };
 }
@@ -62,6 +113,7 @@ interface MatchState {
 const initialState = {
   game: {
     lineup: [],
+    subs: [],
     events: [],
   },
 } as MatchState;
@@ -76,9 +128,24 @@ export const matchSlice = createSlice({
         state.game = action.payload.match;
       }
     });
-    builder.addCase(modifyLineup.fulfilled, (state, action) => {
+    builder.addCase(addLineup.fulfilled, (state, action) => {
       if (action.payload) {
-        state.game = action.payload.match;
+        state.game.lineup = [...state.game.lineup, action.payload.player];
+      }
+    });
+    builder.addCase(addSub.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.game.subs = [...state.game.subs, action.payload.player];
+      }
+    });
+    builder.addCase(modifyRating.fulfilled, (state, action) => {
+      if (action.payload) {
+        const newRating = action.payload.rating;
+        state.game.lineup = state.game.lineup.map((player) =>
+          player.id === newRating.id
+            ? { ...player, rating: newRating.rating }
+            : player
+        );
       }
     });
   },

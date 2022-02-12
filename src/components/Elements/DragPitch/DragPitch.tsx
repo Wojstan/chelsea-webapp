@@ -3,10 +3,10 @@ import pitchImg from "../../../images/pitch.png";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getMatch, modifyLineup } from "../../../services/matchSlice";
+import { addLineup, addSub, getMatch } from "../../../services/matchSlice";
 import { Spin } from "antd";
 import { Player } from "../../../types/player";
-import { formation, subs } from "./formations";
+import { formation, subPlayers } from "./formations";
 import { DeleteOutlined } from "@ant-design/icons";
 
 type Props = {
@@ -17,7 +17,7 @@ const DragPitch = ({ draggingObject }: Props) => {
   const { matchId } = useParams<{ matchId?: string }>();
 
   const matchData = useSelector((state: any) => state.match);
-  const { lineup } = matchData.game;
+  const { lineup, subs } = matchData.game;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +42,13 @@ const DragPitch = ({ draggingObject }: Props) => {
     element.classList.remove("dragenter");
   };
 
-  const onDrop = (e: any, id: number, top: string, left: string): void => {
+  const onDrop = (
+    e: any,
+    id: number,
+    top: string,
+    left: string,
+    isSub: boolean
+  ): void => {
     e.preventDefault();
 
     const element = e.target as HTMLElement;
@@ -58,13 +64,18 @@ const DragPitch = ({ draggingObject }: Props) => {
       },
     };
 
-    const newLineup = [...lineup, newPlayer];
-
-    dispatch(modifyLineup({ id: Number(matchId), team: newLineup }));
+    isSub
+      ? dispatch(addSub({ id: Number(matchId), newPlayer }))
+      : dispatch(addLineup({ id: Number(matchId), newPlayer }));
   };
 
   const isInTheLineup = (id: number) =>
     lineup.filter((player: Player) => player.position.id === id).length
+      ? true
+      : false;
+
+  const isInTheSub = (id: number) =>
+    subs.filter((player: Player) => player.position.id === id).length
       ? true
       : false;
 
@@ -79,12 +90,7 @@ const DragPitch = ({ draggingObject }: Props) => {
         <option value={2}>4-4-2</option>
         <option value={3}>4-2-3-1</option>
       </select>
-      <button
-        className="btn active"
-        onClick={() =>
-          dispatch(modifyLineup({ id: Number(matchId), team: [] }))
-        }
-      >
+      <button className="btn active">
         <DeleteOutlined />
       </button>
 
@@ -99,7 +105,9 @@ const DragPitch = ({ draggingObject }: Props) => {
                 onDragEnter={(e) => onDragEnter(e)}
                 onDragOver={(e) => onDragOver(e)}
                 onDragLeave={(e) => onDragLeave(e)}
-                onDrop={(e) => onDrop(e, element.id, element.top, element.left)}
+                onDrop={(e) =>
+                  onDrop(e, element.id, element.top, element.left, false)
+                }
                 className={styles.formation}
                 style={{
                   top: element.top,
@@ -113,45 +121,39 @@ const DragPitch = ({ draggingObject }: Props) => {
             )
         )}
 
-        {lineup.map(
-          (player: Player, i: number) =>
-            player.position.id <= 11 && (
-              <div
-                key={i}
-                className={styles.player}
-                style={{
-                  top: player.position.top,
-                  left: player.position.left,
-                }}
-              >
-                <div>{player.number}</div>
-                {player.last}
-              </div>
-            )
-        )}
+        {lineup.map((player: Player, i: number) => (
+          <div
+            key={i}
+            className={styles.player}
+            style={{
+              top: player.position.top,
+              left: player.position.left,
+            }}
+          >
+            <div>{player.number}</div>
+            {player.last}
+          </div>
+        ))}
       </div>
 
       <div className="badge mt-3 mb-4">SUBS</div>
 
       <ul style={{ display: "flex" }} className="mb-4">
-        {lineup.map(
-          (player: Player, i: number) =>
-            player.position.id > 11 && (
-              <li key={i} className={styles.subplayer}>
-                <div>{player.number}</div>
-                {player.last}
-              </li>
-            )
-        )}
-        {subs.map(
+        {subs.map((player: Player, i: number) => (
+          <li key={i} className={styles.subplayer}>
+            <div>{player.number}</div>
+            {player.last}
+          </li>
+        ))}
+        {subPlayers.map(
           (sub, i) =>
-            !isInTheLineup(sub.id) && (
+            !isInTheSub(sub.id) && (
               <li
                 key={i}
                 onDragEnter={(e) => onDragEnter(e)}
                 onDragOver={(e) => onDragOver(e)}
                 onDragLeave={(e) => onDragLeave(e)}
-                onDrop={(e) => onDrop(e, sub.id, "0", "0")}
+                onDrop={(e) => onDrop(e, sub.id, "0", "0", true)}
                 className={styles.subs}
                 style={{
                   position: "static",
