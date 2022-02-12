@@ -1,13 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { footballApi } from "../services/footbalAPI";
+import { localApi } from "../services/localAPI";
+
+import matchReducer from "../services/matchSlice";
 
 export const store = configureStore({
   reducer: {
     [footballApi.reducerPath]: footballApi.reducer,
+    [localApi.reducerPath]: localApi.reducer,
+    match: matchReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(footballApi.middleware),
+    getDefaultMiddleware().concat(footballApi.middleware, localApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

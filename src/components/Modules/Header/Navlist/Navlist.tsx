@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navlist.module.css";
+import { HomeOutlined, OrderedListOutlined } from "@ant-design/icons";
 
 const Navlist = () => {
   const [active, setActive] = useState(0);
@@ -13,26 +14,37 @@ const Navlist = () => {
           onClick={() => setActive(0)}
           to="/"
         >
-          <li>Home</li>
+          <li>
+            <HomeOutlined />
+            <div>MATCHES</div>
+          </li>
         </Link>
         <Link
           className={active === 1 ? styles.active : ""}
           onClick={() => setActive(1)}
-          to="/fixture"
+          to="/table"
         >
-          <li>Fixture</li>
+          <li>
+            <OrderedListOutlined />
+            <div>TABLE</div>
+          </li>
         </Link>
-        <Link
-          className={active === 2 ? styles.active : ""}
-          onClick={() => setActive(2)}
-          to="/results"
-        >
-          <li>Results</li>
-        </Link>
-        <li>Players</li>
       </ul>
     </nav>
   );
 };
 
 export default Navlist;
+
+/*
+ <Link
+          className={active === 2 ? styles.active : ""}
+          onClick={() => setActive(2)}
+          to="/players"
+        >
+          <li>
+            <UsergroupAddOutlined />
+            <div>PLAYERS</div>
+          </li>
+        </Link>
+*/

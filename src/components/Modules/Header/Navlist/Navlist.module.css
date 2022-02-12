@@ -1,18 +1,27 @@
 .navlist {
   list-style: none;
   display: flex;
-  position: absolute;
-  bottom: 0;
+  margin-top: 1rem;
 }
 
 .navlist li {
-  color: #858585;
-  padding: 1rem 2.5rem;
+  color: #515151;
+  padding: 1rem 4rem;
   cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
 }
 
 .active li {
   color: #000000 !important;
-  border-bottom: 3px solid #001488;
+  font-weight: 600;
+  border-bottom: 3px solid #ff0046;
   border-radius: 2px;
+}
+
+.navlist span {
+  font-size: 1.3rem;
+  margin-right: 0.6rem;
 }

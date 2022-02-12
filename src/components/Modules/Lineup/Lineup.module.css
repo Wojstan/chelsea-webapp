@@ -1,0 +1,40 @@
+.flex {
+  display: flex;
+}
+
+.list {
+  width: 30%;
+  margin-left: 2rem;
+  animation: enterLeft 0.4s 0.2s both;
+}
+
+.formation {
+  width: 70%;
+  animation: enterLeft 0.4s 0.1s both;
+}
+
+.ol {
+  list-style: none;
+  height: 619.8px;
+  overflow-y: auto;
+}
+
+.ol::-webkit-scrollbar {
+  display: none;
+}
+
+.ol {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes enterLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}

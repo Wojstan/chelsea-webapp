@@ -1,47 +1,78 @@
 .block {
   background-color: #f2f3f7;
-  min-width: 32.5%;
-  display: inline-block;
-  position: relative;
-  padding: 1.5rem;
-  margin: 2rem 0;
-}
-
-.triangle {
-  background-image: linear-gradient(
-    to left top,
-    #e3e6ef 0%,
-    #e3e6ef 50%,
-    transparent 50%
-  );
-  position: absolute;
   width: 100%;
-  height: 20%;
-  bottom: 0;
-  left: 0;
+  border: 1px solid #fcfcfc;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  animation: enterLeft 0.4s;
 }
 
-.score {
-  padding: 1rem;
+.team {
+  margin-left: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.score img {
-  margin-right: 1rem;
+.team span {
+  display: flex;
 }
 
-.score span {
+.team img {
+  margin-right: 0.5rem;
+}
+
+.score {
+  font-family: "Roboto", sans-serif;
+  color: #a4a4a4;
+  font-weight: 400;
+}
+
+.score strong {
+  margin-right: 0.6rem;
+  color: black;
+}
+
+.separator {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.centre {
-  position: absolute;
-  bottom: 4%;
-  right: 4%;
-  color: #0033fe;
-  font-size: 1.2rem;
-  font-weight: 600;
+.separator div {
+  width: 1px;
+  height: 40px;
+  background-color: #dbdbdb;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.buttons button {
+  border: none;
+  background-color: transparent;
+  color: #a4a4a4;
+  font-size: 1.3rem;
+  margin: 0 0.2rem;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  color: #ff0046;
+  transition: 0.3s;
+}
+
+@keyframes enterLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }

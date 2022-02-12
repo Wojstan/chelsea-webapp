@@ -1,12 +1,13 @@
 import Header from "../components/Modules/Header/Header";
 
 type Props = {
+  fullHeader: boolean;
   children: React.ReactNode;
 };
 
-const DefaultLayout = ({ children }: Props) => (
+const DefaultLayout = ({ fullHeader, children }: Props) => (
   <>
-    <Header />
+    <Header fullHeader={fullHeader} />
     {children}
   </>
 );

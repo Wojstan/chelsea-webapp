@@ -38,15 +38,10 @@ const MatchCountdown = ({ nextMatch, awayTeam }: Props) => {
   }, [tick]);
 
   return (
-    <div className={styles.countdown}>
-      <h1>{days}d</h1>
-      <h1>{hours}h</h1>
-      <h1>{minutes}m</h1>
-      <h1>{seconds}s</h1>
-      <p>
-        Till the next match with <strong>{awayTeam}</strong>
-      </p>
-    </div>
+    <h6 className={styles.countdown}>
+      NEXT GAME: {days}D {hours}H {minutes}M {seconds}S with{" "}
+      <strong>{awayTeam}</strong>
+    </h6>
   );
 };
 

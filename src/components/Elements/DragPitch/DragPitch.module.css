@@ -1,0 +1,87 @@
+.pitch img {
+  width: 100%;
+  border-radius: 30px;
+}
+
+.pitch {
+  position: relative;
+}
+
+.formation,
+.subs {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 10px;
+}
+
+.formation {
+  position: absolute;
+  background-color: white;
+  transform: translateY(-50%);
+}
+
+.subs {
+  color: white;
+  background-color: #797979;
+  margin-right: 0.5rem;
+}
+
+.player,
+.subplayer {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  border-radius: 40px;
+  padding-right: 0.8rem;
+  animation: enterTop 0.4s 0.1s both;
+}
+
+.player {
+  position: absolute;
+  z-index: 3;
+  background-color: white;
+}
+
+.subplayer {
+  background-color: #f2f3f7;
+  animation: enterTop2 0.4s 0.1s both;
+  margin-right: 0.5rem;
+}
+
+.player div,
+.subplayer div {
+  background-color: #0033fe;
+  color: white;
+  margin-right: 0.7rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+}
+
+@keyframes enterTop {
+  from {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes enterTop2 {
+  from {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

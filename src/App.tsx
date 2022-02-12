@@ -1,23 +1,34 @@
 import Home from "./views/Home/Home";
 import DefaultLayout from "./layout/DefaultLayout";
 import { Switch, Route } from "react-router-dom";
-import Fixture from "./views/Fixture/Fixture";
-import Results from "./views/Results/Results";
+import Players from "./views/Players/Players";
+import Table from "./views/Table/Table";
+import MatchCentre from "./views/MatchCentre/MatchCentre";
 
 const App = () => (
-  <DefaultLayout>
-    <Switch>
-      <Route exact path="/">
+  <Switch>
+    <Route exact path="/">
+      <DefaultLayout fullHeader>
         <Home />
-      </Route>
-      <Route exact path="/fixture">
-        <Fixture />
-      </Route>
-      <Route exact path="/results">
-        <Results />
-      </Route>
-    </Switch>
-  </DefaultLayout>
+      </DefaultLayout>
+    </Route>
+
+    <Route exact path="/table">
+      <DefaultLayout fullHeader>
+        <Table />
+      </DefaultLayout>
+    </Route>
+    <Route exact path="/players">
+      <DefaultLayout fullHeader>
+        <Players />
+      </DefaultLayout>
+    </Route>
+    <Route exact path="/results/:matchId">
+      <DefaultLayout fullHeader={false}>
+        <MatchCentre />
+      </DefaultLayout>
+    </Route>
+  </Switch>
 );
 
 export default App;

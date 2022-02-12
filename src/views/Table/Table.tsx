@@ -1,9 +1,8 @@
 import { Spin } from "antd";
-import { useGetPremierLeagueStandingsQuery } from "../../../services/footbalAPI";
+import { useGetPremierLeagueStandingsQuery } from "../../services/footbalAPI";
+import styles from "./Table.module.css";
 
-import styles from "./PLTable.module.css";
-
-const PLTable = () => {
+const Table = () => {
   const { data, isFetching } = useGetPremierLeagueStandingsQuery(0);
 
   const tableData = data?.standings[0].table;
@@ -12,11 +11,12 @@ const PLTable = () => {
     return <Spin size="large" />;
   }
 
-  console.log(tableData);
-
   return (
-    <div className={styles.scroll}>
-      <h5 className="mb-3">2021/2022</h5>
+    <div className={`${styles.scroll} container`} style={{ marginTop: "4rem" }}>
+      <nav className="nav">
+        <div className="badge">2021/2022</div>
+      </nav>
+
       <table className={styles.table}>
         <thead>
           <tr>
@@ -68,4 +68,4 @@ const PLTable = () => {
   );
 };
 
-export default PLTable;
+export default Table;

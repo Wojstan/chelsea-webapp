@@ -29,10 +29,16 @@ export const footballApi = createApi({
       },
     }),
     getPremierLeagueStandings: builder.query({
-      query: () => createRequest("competitions/PL/standings"),
+      query: () => createRequest("competitions/2021/standings"),
+    }),
+    getSingleMatch: builder.query({
+      query: (id: string) => createRequest(`matches/${id}`),
     }),
   }),
 });
 
-export const { useGetChelseaMatchesQuery, useGetPremierLeagueStandingsQuery } =
-  footballApi;
+export const {
+  useGetChelseaMatchesQuery,
+  useGetPremierLeagueStandingsQuery,
+  useGetSingleMatchQuery,
+} = footballApi;

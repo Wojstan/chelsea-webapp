@@ -1,13 +1,22 @@
-import * as express from "express";
-import * as mongoose from "mongoose";
-import * as cors from "cors";
-
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+
+require("dotenv/config");
 
 const playersRoute = require("./routes/players");
 const matchesRoute = require("./routes/matches");
 
-const app = express();
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PATCH");
+  next();
+});
 
 app.use(bodyParser.json());
 app.use("/players", playersRoute);
