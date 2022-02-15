@@ -40,7 +40,7 @@ const RatingPlayer = ({ id, avatar, name, lastName, rating }: Props) => {
         </span>
 
         <select value={rating} onChange={handleChange}>
-          <option value={0}>-</option>
+          {rating === 0 && <option value={0}>-</option>}
           {[...Array(10)].map((rate, i) => (
             <option key={i} value={i + 1}>
               {i + 1}

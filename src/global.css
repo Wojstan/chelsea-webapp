@@ -149,3 +149,13 @@ main {
 .dragenter {
   opacity: 1 !important;
 }
+
+.table-parity td {
+  background-color: white !important;
+}
+
+.bg-light {
+  background-color: #f2f3f7;
+  border: 1px solid #fcfcfc;
+  border-radius: 25px;
+}

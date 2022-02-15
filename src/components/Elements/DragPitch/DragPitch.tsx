@@ -86,13 +86,11 @@ const DragPitch = ({ draggingObject }: Props) => {
   return (
     <>
       <select className="mb-4 mr-2" name="" id="">
-        <option value={1}>3-4-4</option>
+        <option value={1}>3-4-3</option>
         <option value={2}>4-4-2</option>
         <option value={3}>4-2-3-1</option>
       </select>
-      <button className="btn active">
-        <DeleteOutlined />
-      </button>
+      <button className="btn active">RESET LINEUP</button>
 
       <div className={styles.pitch}>
         <img src={pitchImg} alt="" />

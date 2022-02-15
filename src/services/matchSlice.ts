@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { MatchEvent } from "../types/matchEvent";
 import { Player } from "../types/player";
 
 export const getMatch = createAsyncThunk(
@@ -102,11 +103,92 @@ export const addSub = createAsyncThunk(
   }
 );
 
+export const addEvent = createAsyncThunk(
+  "match/addEvent",
+  async (payload: {
+    pageId: number;
+    newEvent: { id: number; goal: string; assist: string };
+  }) => {
+    const { pageId, newEvent } = payload;
+    const response = await fetch(
+      `http://localhost:4442/matches/events/${pageId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          event: newEvent,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      const event = await response.json();
+
+      return { event };
+    }
+  }
+);
+
+export const modifyGoal = createAsyncThunk(
+  "match/modifyGoal",
+  async (payload: { pageId: number; id: number; goal: string }) => {
+    const { pageId, id, goal } = payload;
+
+    const response = await fetch(
+      `http://localhost:4442/matches/events/goal/${pageId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          goal,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      const event = await response.json();
+
+      return { event };
+    }
+  }
+);
+
+export const modifyAssist = createAsyncThunk(
+  "match/modifyAssist",
+  async (payload: { pageId: number; id: number; assist: string }) => {
+    const { pageId, id, assist } = payload;
+    const response = await fetch(
+      `http://localhost:4442/matches/events/assist/${pageId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          assist,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      const event = await response.json();
+
+      return { event };
+    }
+  }
+);
+
 interface MatchState {
   game: {
     lineup: Array<Player>;
     subs: Array<Player>;
-    events: Array<any>;
+    events: Array<MatchEvent>;
   };
 }
 
@@ -145,6 +227,31 @@ export const matchSlice = createSlice({
           player.id === newRating.id
             ? { ...player, rating: newRating.rating }
             : player
+        );
+      }
+    });
+    builder.addCase(addEvent.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.game.events = [...state.game.events, action.payload.event];
+      }
+    });
+    builder.addCase(modifyAssist.fulfilled, (state, action) => {
+      if (action.payload) {
+        const newEvent = action.payload.event;
+
+        state.game.events = state.game.events.map((event) =>
+          event.id === newEvent.id
+            ? { ...event, assist: newEvent.assist }
+            : event
+        );
+      }
+    });
+    builder.addCase(modifyGoal.fulfilled, (state, action) => {
+      if (action.payload) {
+        const newEvent = action.payload.event;
+
+        state.game.events = state.game.events.map((event) =>
+          event.id === newEvent.id ? { ...event, goal: newEvent.goal } : event
         );
       }
     });

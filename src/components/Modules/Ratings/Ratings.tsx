@@ -29,6 +29,19 @@ const Ratings = () => {
           rating={player.rating}
         />
       ))}
+      <br />
+      <div className="badge mt-5 mb-4">SUBS</div>
+      <br />
+      {subs.map((player: Player) => (
+        <RatingPlayer
+          key={player.id}
+          id={player.id}
+          avatar={player.img}
+          name={player.name}
+          lastName={player.last}
+          rating={player.rating}
+        />
+      ))}
     </div>
   );
 };

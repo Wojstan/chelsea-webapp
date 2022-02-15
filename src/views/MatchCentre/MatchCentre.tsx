@@ -2,6 +2,7 @@ import { Spin } from "antd";
 import { useState } from "react";
 import { useParams } from "react-router";
 import CentreHeader from "../../components/Modules/CentreHeader/CentreHeader";
+import Events from "../../components/Modules/Events/Events";
 import Lineup from "../../components/Modules/Lineup/Lineup";
 import Ratings from "../../components/Modules/Ratings/Ratings";
 import StartingList from "../../components/Modules/StartingList/StartingList";
@@ -53,6 +54,15 @@ const MatchCentre = () => {
 
           {active === "lineup" && <Lineup />}
           {active === "ratings" && <Ratings />}
+          {active === "events" && (
+            <Events
+              goalNumber={
+                matchData.homeTeam.name === "Chelsea FC"
+                  ? matchData.score.fullTime.homeTeam
+                  : matchData.score.fullTime.awayTeam
+              }
+            />
+          )}
 
           <StartingList />
         </div>

@@ -31,10 +31,6 @@ tbody td:last-child {
   border-top: none;
 }
 
-.parity td {
-  background-color: white !important;
-}
-
 .table img {
   height: 20px;
 }
