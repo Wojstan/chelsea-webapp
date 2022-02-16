@@ -1,0 +1,64 @@
+.playerimg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #0033fe;
+  position: relative;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.playerimg img {
+  width: 145%;
+  height: 145%;
+  position: absolute;
+  top: 6px;
+  right: -11px;
+}
+
+.cont {
+  display: inline-block;
+  width: 24%;
+  margin: 0.5%;
+}
+
+.block {
+  background-color: #f2f3f7;
+  border: 1px solid #fcfcfc;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.5rem;
+  animation: enterLeft 0.4s;
+  transition: 0.4s;
+}
+
+.block span {
+  display: flex;
+}
+
+.block h4 {
+  font-size: 1rem;
+  margin-top: 0.1rem;
+  text-transform: uppercase;
+}
+.block h5 {
+  margin-top: 0.1rem;
+}
+
+.block:hover {
+  background-color: #dddcdc;
+  cursor: pointer;
+}
+
+@keyframes enterLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}

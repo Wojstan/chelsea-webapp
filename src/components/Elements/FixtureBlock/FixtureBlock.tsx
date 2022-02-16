@@ -1,13 +1,19 @@
-import { Col, Typography } from "antd";
 import styles from "./FixtureBlock.module.css";
+import plLogo from "../../../images/pl.png";
+import clLogo from "../../../images/cl.png";
 
-const { Text, Title } = Typography;
+import { ReconciliationOutlined, StarOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 type Props = {
+  id: number;
   column: boolean;
-  separator: boolean;
   homeScore: string;
   awayScore: string;
+  halfHomeScore: string;
+  halfAwayScore: string;
+  homeTeam: string;
+  awayTeam: string;
   homeCrest: string;
   awayCrest: string;
   competition: string;
@@ -21,53 +27,107 @@ const defaultProps = {
   awayScore: "",
 };
 
+const monthsShort = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
 const FixtureBlock = ({
-  column,
+  id,
   competition,
   homeScore,
   awayScore,
+  homeTeam,
+  awayTeam,
+  halfHomeScore,
+  halfAwayScore,
   homeCrest,
   awayCrest,
   date,
-  separator,
 }: Props) => {
-  const blockTemplate = (
-    <>
-      <Text type="secondary">{competition}</Text>
-      <br />
-      <Text style={{ fontWeight: 500 }}>{date.toDateString()}</Text>
-      <div
-        className={styles.result}
-        style={column ? { paddingRight: "4rem" } : {}}
-      >
-        <img src={homeCrest} height={80} alt="" />
-        <Title className={styles.text} level={1}>
-          {homeScore}-{awayScore}
-        </Title>
-        <img src={awayCrest} height={80} alt="" />
-      </div>
-    </>
-  );
+  const addZero = (dateNumber: number) =>
+    dateNumber < 10 ? `0${dateNumber}` : dateNumber;
+
+  const dateString = `${monthsShort[date.getMonth()]} ${addZero(
+    date.getDate()
+  )}, ${date.getHours()}:${addZero(date.getMinutes())}`;
+
+  const results = [
+    {
+      team: homeTeam,
+      score: homeScore,
+      crest: homeCrest,
+      halfScore: halfHomeScore,
+      isHome: homeTeam === "Chelsea FC",
+    },
+    {
+      team: awayTeam,
+      score: awayScore,
+      crest: awayCrest,
+      halfScore: halfAwayScore,
+      isHome: awayTeam === "Chelsea FC",
+    },
+  ];
 
   return (
-    <>
-      {column ? (
-        <Col
-          xxl={6}
-          style={{
-            padding: "0em 0rem 1rem 4rem",
-            borderRight: separator ? "1px solid #E9ECEF" : "",
-            fontSize: "1rem",
-          }}
-        >
-          {blockTemplate}
-        </Col>
-      ) : (
-        <div style={{ padding: "1rem 0", fontSize: "1rem" }}>
-          {blockTemplate}
-        </div>
-      )}
-    </>
+    <div className={styles.block}>
+      <div className="text-center" style={{ width: "7%" }}>
+        <img
+          height={37}
+          src={competition === "Premier League" ? plLogo : clLogo}
+          alt=""
+        />
+      </div>
+
+      <h5 className="text-center" style={{ width: "17%" }}>
+        {dateString}
+      </h5>
+
+      <div style={{ width: "53%" }}>
+        {results.map((row, i) => (
+          <div
+            key={i}
+            className={styles.team}
+            style={{ marginBottom: i === 0 ? "0.6rem" : "0" }}
+          >
+            <span>
+              <img height={20} src={row.crest} alt="" />
+              <h4 style={{ fontWeight: row.isHome ? 600 : 500 }}>{row.team}</h4>
+            </span>
+            <h4 className={styles.score}>
+              <strong>{row.score ? row.score : "-"}</strong>({row.halfScore})
+            </h4>
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.separator} style={{ width: "8%" }}>
+        <div></div>
+      </div>
+
+      <div className={styles.buttons} style={{ width: "15%" }}>
+        <button>
+          <StarOutlined />
+        </button>
+        {homeScore !== "" && (
+          <Link to={`/results/${id}`}>
+            <button>
+              <ReconciliationOutlined />
+            </button>
+          </Link>
+        )}
+      </div>
+    </div>
   );
 };
 

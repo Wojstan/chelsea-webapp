@@ -1,29 +1,34 @@
-import { Layout } from "antd";
-import Menu from "./components/Modules/Menu/Menu";
 import Home from "./views/Home/Home";
-
-const { Sider, Content, Header } = Layout;
+import DefaultLayout from "./layout/DefaultLayout";
+import { Switch, Route } from "react-router-dom";
+import Players from "./views/Players/Players";
+import Table from "./views/Table/Table";
+import MatchCentre from "./views/MatchCentre/MatchCentre";
 
 const App = () => (
-  <Layout>
-    <Sider
-      style={{
-        overflow: "hidden",
-        height: "100vh",
-        position: "fixed",
-        left: 0,
-      }}
-      width="18rem"
-    >
-      <Menu />
-    </Sider>
-    <Layout className="site-layout" style={{ marginLeft: "18rem" }}>
-      <Header></Header>
-      <Content>
+  <Switch>
+    <Route exact path="/">
+      <DefaultLayout fullHeader>
         <Home />
-      </Content>
-    </Layout>
-  </Layout>
+      </DefaultLayout>
+    </Route>
+
+    <Route exact path="/table">
+      <DefaultLayout fullHeader>
+        <Table />
+      </DefaultLayout>
+    </Route>
+    <Route exact path="/players">
+      <DefaultLayout fullHeader>
+        <Players />
+      </DefaultLayout>
+    </Route>
+    <Route exact path="/results/:matchId">
+      <DefaultLayout fullHeader={false}>
+        <MatchCentre />
+      </DefaultLayout>
+    </Route>
+  </Switch>
 );
 
 export default App;

@@ -1,0 +1,38 @@
+.header {
+  background-color: #f2f3f7;
+  border-bottom: 1px solid #dfdfdf;
+  padding: 2.5rem;
+}
+
+.logo {
+  height: 115px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.logo img {
+  height: 100%;
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 14rem;
+}
+
+.score {
+  margin: 0rem 2rem;
+}
+
+h6 {
+  color: #515151;
+  font-weight: 500;
+}
