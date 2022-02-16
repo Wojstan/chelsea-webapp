@@ -18,6 +18,14 @@ const StartingLineup = () => {
     dispatch(getMatch({ id: Number(matchId) }));
   }, [dispatch, matchId]);
 
+  if (lineup.length === 0) {
+    return (
+      <tr className="table-parity text-center">
+        <td colSpan={5}>EMPTY LINEUP</td>
+      </tr>
+    );
+  }
+
   return (
     <>
       {lineup.map((player: Player, i: number) => (

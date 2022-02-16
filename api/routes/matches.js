@@ -35,6 +35,21 @@ router.post("/:matchId", async (req, res) => {
   }
 });
 
+router.delete("/:matchId", async (req, res) => {
+  try {
+    await Match.findByIdAndUpdate(
+      { _id: req.params.matchId },
+      { $set: { lineup: [], subs: [] } },
+      { new: true, useFindAndModify: false }
+    );
+
+    res.json(200);
+  } catch (err) {
+    console.log(err);
+    res.json({ message: err });
+  }
+});
+
 router.post("/lineup/:matchId", async (req, res) => {
   try {
     const match = await Match.findById(req.params.matchId);

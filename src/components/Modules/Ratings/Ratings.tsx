@@ -18,30 +18,36 @@ const Ratings = () => {
   return (
     <div>
       <div className="badge mb-4">LINEUP</div>
-      <br />
-      {lineup.map((player: Player) => (
-        <RatingPlayer
-          key={player.id}
-          id={player.id}
-          avatar={player.img}
-          name={player.name}
-          lastName={player.last}
-          rating={player.rating}
-        />
-      ))}
-      <br />
-      <div className="badge mt-5 mb-4">SUBS</div>
-      <br />
-      {subs.map((player: Player) => (
-        <RatingPlayer
-          key={player.id}
-          id={player.id}
-          avatar={player.img}
-          name={player.name}
-          lastName={player.last}
-          rating={player.rating}
-        />
-      ))}
+      {lineup.length ? (
+        <>
+          <br />
+          {lineup.map((player: Player) => (
+            <RatingPlayer
+              key={player.id}
+              id={player.id}
+              avatar={player.img}
+              name={player.name}
+              lastName={player.last}
+              rating={player.rating}
+            />
+          ))}
+          <br />
+          <div className="badge mt-5 mb-4">SUBS</div>
+          <br />
+          {subs.map((player: Player) => (
+            <RatingPlayer
+              key={player.id}
+              id={player.id}
+              avatar={player.img}
+              name={player.name}
+              lastName={player.last}
+              rating={player.rating}
+            />
+          ))}
+        </>
+      ) : (
+        <h4 className="text-center">FILL THE LINEUP FIRST</h4>
+      )}
     </div>
   );
 };

@@ -19,7 +19,6 @@ export const getMatch = createAsyncThunk(
           },
           body: JSON.stringify({
             _id: id,
-            lineup: [],
           }),
         });
 
@@ -78,6 +77,19 @@ export const modifyRating = createAsyncThunk(
 
       return { rating };
     }
+  }
+);
+
+export const resetMatch = createAsyncThunk(
+  "match/resetMatch",
+  async (payload: { pageId: string }) => {
+    const { pageId } = payload;
+    await fetch(`http://localhost:4442/matches/${pageId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 );
 
@@ -214,6 +226,10 @@ export const matchSlice = createSlice({
       if (action.payload) {
         state.game.lineup = [...state.game.lineup, action.payload.player];
       }
+    });
+    builder.addCase(resetMatch.fulfilled, (state, action) => {
+      state.game.lineup = [];
+      state.game.subs = [];
     });
     builder.addCase(addSub.fulfilled, (state, action) => {
       if (action.payload) {

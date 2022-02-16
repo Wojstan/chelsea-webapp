@@ -22,8 +22,17 @@ const StartingSubs = () => {
     return <Spin />;
   }
 
+  if (subs.length === 0) {
+    return <tr className="table-parity"></tr>;
+  }
+
   return (
     <>
+      <tr className="table-parity">
+        <td colSpan={5}>
+          <div className="badge mt-3 mb-3">SUBS</div>
+        </td>
+      </tr>
       {subs.map((player: Player, i: number) => (
         <StartingItem
           key={i}

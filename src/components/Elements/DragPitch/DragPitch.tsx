@@ -3,11 +3,15 @@ import pitchImg from "../../../images/pitch.png";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addLineup, addSub, getMatch } from "../../../services/matchSlice";
+import {
+  addLineup,
+  addSub,
+  getMatch,
+  resetMatch,
+} from "../../../services/matchSlice";
 import { Spin } from "antd";
 import { Player } from "../../../types/player";
 import { formation, subPlayers } from "./formations";
-import { DeleteOutlined } from "@ant-design/icons";
 
 type Props = {
   draggingObject: any;
@@ -90,7 +94,12 @@ const DragPitch = ({ draggingObject }: Props) => {
         <option value={2}>4-4-2</option>
         <option value={3}>4-2-3-1</option>
       </select>
-      <button className="btn active">RESET LINEUP</button>
+      <button
+        className="btn active"
+        onClick={() => dispatch(resetMatch({ pageId: matchId as string }))}
+      >
+        RESET LINEUP
+      </button>
 
       <div className={styles.pitch}>
         <img src={pitchImg} alt="" />
